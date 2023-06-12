@@ -261,10 +261,10 @@ valid_loader = DataLoader(
 
 model = Decoder(vocab_size=tokenizer.vocab_size,
     max_len=tokenizer.max_model_input_sizes[checkpoint],
-    d_k=64,
+    d_k=16,
     d_model=768,
     n_heads=12,
-    n_layers=12,
+    n_layers=2,
     dropout_prob=0.1)
 
 model.load_state_dict(torch.load(

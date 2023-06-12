@@ -1,0 +1,6 @@
+lr scheduler helps 
+increasing n_heads helps 
+increase d_model helps
+init weights bad 
+n_layers - reduce this 
+learning rate = 0.001

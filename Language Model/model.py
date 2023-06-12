@@ -199,9 +199,14 @@ criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.pad_token_id)
 optimizer = torch.optim.Adam(model.parameters())
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=2000, eta_min=0)
 
+def plot_loss(epochs, loss):
+    plt.plot(epochs, loss)
+    plt.show()
+
 # A function to encapsulate the training loop
 def train(model, criterion, optimizer, train_loader, epochs):
     train_losses = np.zeros(epochs)
+    loss_vals = []
 
     for it in range(epochs):
         model.train()
@@ -241,9 +246,13 @@ def train(model, criterion, optimizer, train_loader, epochs):
 
         # Save losses
         train_losses[it] = train_loss
+        
+        loss_vals.append(train_loss)
 
         dt = datetime.now() - t0
         print(f'Epoch {it+1}/{epochs}, Train Loss: {train_loss:.4f}, Duration: {dt}')
+    
+    plot_loss(np.linspace(1, epochs, epochs).astype(int), loss_vals)
 
     return train_losses
 
